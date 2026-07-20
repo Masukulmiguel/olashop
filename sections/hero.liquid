@@ -4,6 +4,9 @@
   </div>
   <div class="hero-overlay" style="background: {{ section.settings.overlay_color }};"></div>
   <div class="hero-content container">
+    <div class="hero-logo">
+      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+    </div>
     {% if section.settings.subtitle != blank %}
       <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
     {% endif %}
@@ -61,6 +64,14 @@
     z-index: 2;
     max-width: 650px;
     padding: 80px 20px;
+  }
+  .hero-logo {
+    margin-bottom: 20px;
+  }
+  .hero-logo img {
+    max-height: 80px;
+    width: auto;
+    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
   }
   .hero-subtitle {
     font-size: 14px;
