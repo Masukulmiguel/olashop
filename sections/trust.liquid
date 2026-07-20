@@ -3,30 +3,34 @@
     <div class="trust-grid">
       {% for block in section.blocks %}
         <div class="trust-item" {{ block.shopify_attributes }}>
-          <div class="trust-icon">
-            {% case block.settings.icon %}
-              {% when 'shipping' %}
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
-                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                </svg>
-              {% when 'secure' %}
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              {% when 'return' %}
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
-                </svg>
-              {% when 'support' %}
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg>
-              {% else %}
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-            {% endcase %}
+          <div class="trust-icon-wrapper">
+            <div class="trust-icon">
+              {% case block.settings.icon %}
+                {% when 'shipping' %}
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                    <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                  </svg>
+                {% when 'secure' %}
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <polyline points="9 12 11 14 15 10"/>
+                  </svg>
+                {% when 'return' %}
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                  </svg>
+                {% when 'support' %}
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    <path d="M8 10h.01M12 10h.01M16 10h.01"/>
+                  </svg>
+                {% else %}
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+              {% endcase %}
+            </div>
           </div>
           <h3 class="trust-title">{{ block.settings.title }}</h3>
           <p class="trust-text">{{ block.settings.text }}</p>
@@ -38,38 +42,130 @@
 
 <style>
   .trust-section {
-    padding: 60px 0;
-    background: #f8f9fa;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    padding: 80px 0;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
   }
+
+  .trust-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  }
+
+  .trust-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  }
+
   .trust-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 40px;
   }
+
   .trust-item {
     text-align: center;
-    padding: 20px;
+    padding: 30px 20px;
+    border-radius: var(--radius-lg);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
   }
+
+  .trust-item:hover {
+    background: var(--color-bg);
+    transform: translateY(-5px);
+  }
+
+  .trust-icon-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+  }
+
+  .trust-icon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.1) 0%, rgba(233, 69, 96, 0.05) 100%);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+  }
+
+  .trust-item:hover .trust-icon-wrapper::before {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.15) 0%, rgba(233, 69, 96, 0.1) 100%);
+  }
+
   .trust-icon {
-    color: #e74c3c;
-    margin-bottom: 15px;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    transition: all 0.4s ease;
   }
+
+  .trust-item:hover .trust-icon {
+    transform: scale(1.1);
+  }
+
+  .trust-icon svg {
+    transition: all 0.4s ease;
+  }
+
+  .trust-item:hover .trust-icon svg {
+    animation: iconBounce 0.6s ease;
+  }
+
+  @keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-8px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-4px); }
+  }
+
   .trust-title {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 8px;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
   }
+
+  .trust-item:hover .trust-title {
+    color: var(--color-accent);
+  }
+
   .trust-text {
-    font-size: 13px;
-    color: #666;
+    font-size: 14px;
+    color: var(--color-text-light);
     line-height: 1.6;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 576px) {
+    .trust-grid { grid-template-columns: 1fr; }
+    .trust-item { padding: 20px; }
   }
 </style>
 

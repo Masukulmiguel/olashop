@@ -1,6 +1,12 @@
 <div class="newsletter-section" style="background: {{ section.settings.bg_color }};">
   <div class="container">
     <div class="newsletter-content">
+      <div class="newsletter-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
       <h2 class="newsletter-title">{{ section.settings.title }}</h2>
       <p class="newsletter-text">{{ section.settings.text }}</p>
       <form class="newsletter-form" action="/contact#newsletter" method="post">
@@ -14,58 +20,119 @@
 
 <style>
   .newsletter-section {
-    padding: 80px 0;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
   }
+
+  .newsletter-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .newsletter-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -5%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
   .newsletter-content {
     text-align: center;
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
+
+  .newsletter-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    margin-bottom: 24px;
+    color: {{ section.settings.text_color }};
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
   .newsletter-title {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 800;
     color: {{ section.settings.text_color }};
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
   }
+
   .newsletter-text {
-    font-size: 16px;
+    font-size: 17px;
     color: {{ section.settings.text_color }};
-    opacity: 0.8;
-    margin-bottom: 30px;
+    opacity: 0.85;
+    margin-bottom: 36px;
+    line-height: 1.7;
   }
+
   .newsletter-form {
     display: flex;
-    gap: 10px;
-    max-width: 480px;
+    gap: 12px;
+    max-width: 500px;
     margin: 0 auto;
   }
+
   .newsletter-input {
     flex: 1;
-    padding: 14px 20px;
+    padding: 16px 24px;
     border: none;
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     font-size: 15px;
     outline: none;
+    background: rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
   }
+
+  .newsletter-input:focus {
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
   .btn-newsletter {
-    background: {{ section.settings.btn_color | default: '#e74c3c' }};
+    background: {{ section.settings.btn_color | default: '#e94560' }};
     color: #fff;
-    padding: 14px 30px;
+    padding: 16px 36px;
     border: none;
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     white-space: nowrap;
   }
+
   .btn-newsletter:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
   }
 
   @media (max-width: 768px) {
     .newsletter-form { flex-direction: column; }
+    .newsletter-title { font-size: 28px; }
   }
 </style>
 
@@ -107,7 +174,7 @@
       "type": "color",
       "id": "btn_color",
       "label": "Cor do botão",
-      "default": "#e74c3c"
+      "default": "#e94560"
     }
   ],
   "presets": [

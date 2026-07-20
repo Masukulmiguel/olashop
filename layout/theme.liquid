@@ -9,16 +9,23 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="icon" type="image/png" href="{{ 'simbole.png' | asset_url }}">
 
-  {{ content_for_header }}
-
+  <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  {{ content_for_header }}
+
   <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
 
   {% if template == 'product' %}
     <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
   {% endif %}
+
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 
 <body class="template-{{ template.name }}">
@@ -34,5 +41,8 @@
   {% section 'footer' %}
 
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
 </body>
 </html>
