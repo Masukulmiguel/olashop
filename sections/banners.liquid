@@ -1,0 +1,202 @@
+<div class="banner-secondary">
+  <div class="container">
+    <div class="banner-secondary-grid">
+      <a href="{{ section.settings.url1 | default: '/collections/all' }}" class="banner-card banner-card-1">
+        <div class="banner-card-bg">
+          <img src="{{ '2.png' | asset_url }}" alt="Promoção">
+        </div>
+        <div class="banner-card-content">
+          <span class="banner-tag">{{ section.settings.tag1 | default: "OFERTA" }}</span>
+          <h3>{{ section.settings.title1 | default: "Até 50% OFF" }}</h3>
+          <p>{{ section.settings.text1 | default: "Aproveite as melhores ofertas" }}</p>
+        </div>
+      </a>
+      <div class="banner-side">
+        <a href="{{ section.settings.url2 | default: '/collections/all' }}" class="banner-card banner-card-2">
+          <div class="banner-card-content">
+            <span class="banner-tag">{{ section.settings.tag2 | default: "NOVO" }}</span>
+            <h3>{{ section.settings.title2 | default: "Colecção Nova" }}</h3>
+            <p>{{ section.settings.text2 | default: "Produtos recém-chegados" }}</p>
+          </div>
+        </a>
+        <a href="{{ section.settings.url3 | default: '/collections/all' }}" class="banner-card banner-card-3">
+          <div class="banner-card-content">
+            <span class="banner-tag">{{ section.settings.tag3 | default: "TENDÊNCIA" }}</span>
+            <h3>{{ section.settings.title3 | default: "Mais Vendidos" }}</h3>
+            <p>{{ section.settings.text3 | default: "Os favoritos dos nossos clientes" }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .banner-secondary {
+    padding: 40px 0;
+  }
+  .banner-secondary-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+  }
+  .banner-card {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    position: relative;
+    min-height: 280px;
+  }
+  .banner-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .banner-card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .banner-card-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .banner-tag {
+    display: inline-block;
+    background: #e74c3c;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+  .banner-card h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .banner-card p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+  }
+  .banner-card-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  .banner-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .banner-card-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    flex: 1;
+  }
+  .banner-card-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    flex: 1;
+  }
+  .banner-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .banner-secondary-grid { grid-template-columns: 1fr; }
+    .banner-side { flex-direction: row; }
+    .banner-card { min-height: 200px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Banners Promocionais",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag1",
+      "label": "Tag Banner 1",
+      "default": "OFERTA"
+    },
+    {
+      "type": "text",
+      "id": "title1",
+      "label": "Título Banner 1",
+      "default": "Até 50% OFF"
+    },
+    {
+      "type": "text",
+      "id": "text1",
+      "label": "Texto Banner 1",
+      "default": "Aproveite as melhores ofertas"
+    },
+    {
+      "type": "url",
+      "id": "url1",
+      "label": "Link Banner 1"
+    },
+    {
+      "type": "text",
+      "id": "tag2",
+      "label": "Tag Banner 2",
+      "default": "NOVO"
+    },
+    {
+      "type": "text",
+      "id": "title2",
+      "label": "Título Banner 2",
+      "default": "Colecção Nova"
+    },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Texto Banner 2"
+    },
+    {
+      "type": "url",
+      "id": "url2",
+      "label": "Link Banner 2"
+    },
+    {
+      "type": "text",
+      "id": "tag3",
+      "label": "Tag Banner 3",
+      "default": "TENDÊNCIA"
+    },
+    {
+      "type": "text",
+      "id": "title3",
+      "label": "Título Banner 3",
+      "default": "Mais Vendidos"
+    },
+    {
+      "type": "text",
+      "id": "text3",
+      "label": "Texto Banner 3"
+    },
+    {
+      "type": "url",
+      "id": "url3",
+      "label": "Link Banner 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banners Promocionais",
+      "category": "Imagem"
+    }
+  ]
+}
+{% endschema %}

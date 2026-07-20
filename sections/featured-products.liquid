@@ -25,11 +25,30 @@
     {% endif %}
   </div>
 </div>
+{% else %}
+<div class="featured-products-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{{ section.settings.title | default: "Produtos em Destaque" }}</h2>
+      <p class="section-subtitle">{{ section.settings.subtitle | default: "Os nossos melhores produtos seleccionados para si" }}</p>
+    </div>
+    <div class="product-grid featured-grid">
+      {% for product in collections['all'].products limit: section.settings.products_count %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        <div class="empty-state">
+          <p>Adicione produtos na administração da loja para os ver aqui.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endif %}
 
 <style>
   .featured-products-section {
     padding: 80px 0;
+    background: #fff;
   }
   .section-header {
     text-align: center;
@@ -67,6 +86,14 @@
   .btn-outline:hover {
     background: #1a1a2e;
     color: #fff;
+  }
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 0;
+    color: #666;
+    background: #f8f9fa;
+    border-radius: 12px;
   }
   @media (max-width: 1024px) {
     .product-grid { grid-template-columns: repeat(3, 1fr); }
@@ -107,7 +134,7 @@
       "min": 2,
       "max": 12,
       "step": 1,
-      "default": 4
+      "default": 8
     },
     {
       "type": "checkbox",

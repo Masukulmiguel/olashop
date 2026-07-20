@@ -1,0 +1,125 @@
+<div class="trust-section">
+  <div class="container">
+    <div class="trust-grid">
+      {% for block in section.blocks %}
+        <div class="trust-item" {{ block.shopify_attributes }}>
+          <div class="trust-icon">
+            {% case block.settings.icon %}
+              {% when 'shipping' %}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              {% when 'secure' %}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              {% when 'return' %}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                </svg>
+              {% when 'support' %}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              {% else %}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            {% endcase %}
+          </div>
+          <h3 class="trust-title">{{ block.settings.title }}</h3>
+          <p class="trust-text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .trust-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+  .trust-item {
+    text-align: center;
+    padding: 20px;
+  }
+  .trust-icon {
+    color: #e74c3c;
+    margin-bottom: 15px;
+  }
+  .trust-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+  }
+  .trust-text {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Vantagens",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Vantagem",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "shipping", "label": "Envio" },
+            { "value": "secure", "label": "Segurança" },
+            { "value": "return", "label": "Devoluções" },
+            { "value": "support", "label": "Apoio ao Cliente" }
+          ],
+          "default": "shipping"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Envio Grátis"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Em compras acima de 50€"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vantagens",
+      "category": "Texto",
+      "blocks": [
+        { "type": "trust", "settings": { "icon": "shipping", "title": "Envio Grátis", "text": "Em compras acima de 50€" } },
+        { "type": "trust", "settings": { "icon": "secure", "title": "Pagamento Seguro", "text": "Dados protegidos e encriptados" } },
+        { "type": "trust", "settings": { "icon": "return", "title": "Devoluções Fáceis", "text": "30 dias para devolver" } },
+        { "type": "trust", "settings": { "icon": "support", "title": "Apoio 24/7", "text": "Estamos sempre disponíveis" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

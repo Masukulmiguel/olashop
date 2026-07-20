@@ -1,0 +1,120 @@
+<div class="newsletter-section" style="background: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="newsletter-content">
+      <h2 class="newsletter-title">{{ section.settings.title }}</h2>
+      <p class="newsletter-text">{{ section.settings.text }}</p>
+      <form class="newsletter-form" action="/contact#newsletter" method="post">
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input type="email" name="contact[email]" placeholder="O seu email" required class="newsletter-input">
+        <button type="submit" class="btn btn-newsletter">{{ section.settings.button_label }}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .newsletter-section {
+    padding: 80px 0;
+  }
+  .newsletter-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .newsletter-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 10px;
+  }
+  .newsletter-text {
+    font-size: 16px;
+    color: {{ section.settings.text_color }};
+    opacity: 0.8;
+    margin-bottom: 30px;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .newsletter-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    outline: none;
+  }
+  .btn-newsletter {
+    background: {{ section.settings.btn_color | default: '#e74c3c' }};
+    color: #fff;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .btn-newsletter:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-form { flex-direction: column; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Receba Ofertas Exclusivas"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "default": "Subscreva a nossa newsletter e fique a par de todas as novidades e promoções."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Subscrever"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Cor de fundo",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Cor do texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Cor do botão",
+      "default": "#e74c3c"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "category": "Texto"
+    }
+  ]
+}
+{% endschema %}
