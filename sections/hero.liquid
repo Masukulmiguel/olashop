@@ -1,22 +1,40 @@
 <div class="hero-section">
-  <div class="hero-image">
-    <img src="{{ 'banner.png' | asset_url }}" alt="OlaShop">
-  </div>
-  <div class="hero-overlay" style="background: {{ section.settings.overlay_color }};"></div>
-  <div class="hero-particles"></div>
-  <div class="hero-content container">
-    <div class="hero-logo animate-fade-in-up">
-      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
     </div>
+  </div>
+  
+  {% if section.settings.show_image and section.settings.banner_image != blank %}
+    <div class="hero-image">
+      <img src="{{ section.settings.banner_image | img_url: '2048x' }}" alt="OlaShop">
+    </div>
+  {% endif %}
+
+  <div class="hero-content container">
+    <div class="hero-badge animate-fade-in-up">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+      {{ section.settings.badge | default: "NOVIDADE" }}
+    </div>
+    
     {% if section.settings.subtitle != blank %}
       <p class="hero-subtitle animate-fade-in-up delay-1">{{ section.settings.subtitle }}</p>
     {% endif %}
+    
     {% if section.settings.title != blank %}
       <h1 class="hero-title animate-fade-in-up delay-2">{{ section.settings.title }}</h1>
     {% endif %}
+    
     {% if section.settings.text != blank %}
       <p class="hero-text animate-fade-in-up delay-3">{{ section.settings.text }}</p>
     {% endif %}
+    
     <div class="hero-buttons animate-fade-in-up delay-4">
       {% if section.settings.button_label != blank %}
         <a href="{{ section.settings.button_url | default: '/collections/all' }}" class="btn btn-hero">
@@ -32,100 +50,172 @@
         </a>
       {% endif %}
     </div>
+
+    <div class="hero-stats animate-fade-in-up delay-5">
+      <div class="stat-item">
+        <span class="stat-number">10K+</span>
+        <span class="stat-label">Clientes</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Produtos</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">4.9</span>
+        <span class="stat-label">Avaliação</span>
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
   .hero-section {
     position: relative;
-    min-height: 600px;
+    min-height: 650px;
     display: flex;
     align-items: center;
     overflow: hidden;
   }
 
-  .hero-image {
+  /* Background Gradient */
+  .hero-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    animation: zoomOut 20s ease-in-out infinite alternate;
+    z-index: 0;
   }
 
-  @keyframes zoomOut {
-    from { transform: scale(1.1); }
-    to { transform: scale(1); }
-  }
-
-  .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero-overlay {
+  .hero-gradient {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: {{ section.settings.overlay_opacity | default: 0.4 }};
-    background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(233, 69, 96, 0.7) 100%);
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   }
 
-  .hero-particles {
+  .hero-pattern {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-image: 
-      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
-      radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
-      radial-gradient(2px 2px at 50px 160px, rgba(255,255,255,0.3), transparent),
-      radial-gradient(2px 2px at 90px 40px, rgba(255,255,255,0.2), transparent),
-      radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.3), transparent),
-      radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.2), transparent);
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    animation: twinkle 5s ease-in-out infinite;
-    opacity: 0.5;
+      radial-gradient(circle at 25% 25%, rgba(233, 69, 96, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(233, 69, 96, 0.05) 0%, transparent 70%);
   }
 
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.8; }
+  /* Animated Orbs */
+  .hero-orbs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(233, 69, 96, 0.3);
+    top: -100px;
+    right: -100px;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(102, 126, 234, 0.3);
+    bottom: -50px;
+    left: -50px;
+    animation-delay: 2s;
+  }
+
+  .orb-3 {
+    width: 200px;
+    height: 200px;
+    background: rgba(240, 147, 251, 0.2);
+    top: 50%;
+    left: 50%;
+    animation-delay: 4s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(30px, -30px) scale(1.05); }
+    50% { transform: translate(-20px, 20px) scale(0.95); }
+    75% { transform: translate(20px, 10px) scale(1.02); }
+  }
+
+  /* Hero Image (optional) */
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
+  /* Content */
   .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 700px;
+    max-width: 750px;
     padding: 100px 24px;
   }
 
-  .hero-logo {
+  /* Badge */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     margin-bottom: 24px;
   }
 
-  .hero-logo img {
-    max-height: 90px;
-    width: auto;
-    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
-  }
-
-  /* Animation Classes */
+  /* Animations */
   .animate-fade-in-up {
     opacity: 0;
     transform: translateY(40px);
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  .delay-1 { animation-delay: 0.2s; }
-  .delay-2 { animation-delay: 0.4s; }
-  .delay-3 { animation-delay: 0.6s; }
-  .delay-4 { animation-delay: 0.8s; }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.6s; }
+  .delay-5 { animation-delay: 0.75s; }
 
   @keyframes fadeInUp {
     from {
@@ -139,32 +229,33 @@
   }
 
   .hero-subtitle {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 4px;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 18px;
-    display: inline-block;
-    padding: 8px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-full);
-    backdrop-filter: blur(10px);
   }
 
   .hero-title {
-    font-size: 58px;
-    font-weight: 800;
+    font-size: 62px;
+    font-weight: 900;
     color: #ffffff;
-    line-height: 1.1;
+    line-height: 1.08;
     margin-bottom: 24px;
-    letter-spacing: -1px;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    letter-spacing: -1.5px;
+  }
+
+  .hero-title span {
+    background: linear-gradient(135deg, #e94560 0%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .hero-text {
     font-size: 19px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.7;
     margin-bottom: 40px;
     max-width: 550px;
@@ -174,21 +265,22 @@
     display: flex;
     gap: 18px;
     flex-wrap: wrap;
+    margin-bottom: 50px;
   }
 
   .btn-hero {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: #ffffff;
-    color: var(--color-primary);
+    background: linear-gradient(135deg, #e94560 0%, #c73e54 100%);
+    color: #fff;
     padding: 18px 40px;
     border-radius: var(--radius-full);
     text-decoration: none;
     font-weight: 700;
     font-size: 16px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 30px rgba(233, 69, 96, 0.4);
     position: relative;
     overflow: hidden;
   }
@@ -200,15 +292,13 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
   }
 
   .btn-hero:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-    background: var(--color-accent);
-    color: #fff;
+    box-shadow: 0 12px 40px rgba(233, 69, 96, 0.5);
   }
 
   .btn-hero:hover::before {
@@ -227,7 +317,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.6);
     color: #ffffff;
     padding: 18px 40px;
     border-radius: var(--radius-full);
@@ -236,24 +326,69 @@
     font-size: 16px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
   }
 
   .btn-hero-outline:hover {
     background: #ffffff;
-    color: var(--color-primary);
+    color: #1a1a2e;
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
     border-color: #ffffff;
   }
 
+  /* Stats */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .hero-title { font-size: 48px; }
+    .hero-stats { gap: 24px; }
+    .stat-number { font-size: 26px; }
+  }
+
   @media (max-width: 768px) {
-    .hero-section { min-height: 500px; }
+    .hero-section { min-height: 600px; }
+    .hero-content { padding: 80px 16px; }
     .hero-title { font-size: 36px; }
     .hero-text { font-size: 16px; }
-    .hero-content { padding: 80px 16px; }
-    .hero-subtitle { font-size: 12px; letter-spacing: 2px; padding: 6px 16px; }
+    .hero-subtitle { font-size: 13px; letter-spacing: 2px; }
     .btn-hero, .btn-hero-outline { padding: 14px 28px; font-size: 14px; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .stat-divider { display: none; }
+    .orb-1 { width: 250px; height: 250px; }
+    .orb-2 { width: 200px; height: 200px; }
+    .orb-3 { width: 150px; height: 150px; }
   }
 </style>
 
@@ -261,6 +396,12 @@
 {
   "name": "Hero Banner",
   "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "NOVIDADE"
+    },
     {
       "type": "text",
       "id": "subtitle",
@@ -301,31 +442,15 @@
       "label": "URL do botão 2"
     },
     {
-      "type": "color",
-      "id": "text_color",
-      "label": "Cor do texto",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Mostrar imagem de fundo",
+      "default": false
     },
     {
-      "type": "color",
-      "id": "btn_color",
-      "label": "Cor do botão",
-      "default": "#e94560"
-    },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Cor do overlay",
-      "default": "#1a1a2e"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Opacidade do overlay",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "default": 0.4
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Imagem de fundo (opcional)"
     }
   ],
   "presets": [
