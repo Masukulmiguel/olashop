@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "colors": {
@@ -10,6 +19,46 @@
       "page_width": 1400,
       "grid_columns": 4,
       "grid_spacing": 25
-    }
+    },
+    "sections": {
+      "announcement": {
+        "type": "announcement",
+        "settings": {
+          "text": "🎉 Frete grátis em compras acima de 50€",
+          "link": "",
+          "icon_left": "🚚",
+          "icon_right": "",
+          "bg_color": "#e94560",
+          "text_color": "#ffffff"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu",
+          "header_bg": "#ffffff",
+          "header_text_color": "#1a1a2e",
+          "accent_color": "#e94560"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_text": "A sua loja online de confiança. Produtos de qualidade com os melhores preços.",
+          "footer_menu_1": "footer",
+          "footer_menu_2": "footer",
+          "phone": "",
+          "email": "",
+          "address": "",
+          "show_social": true,
+          "facebook": "",
+          "instagram": "",
+          "footer_bg": "#1a1a2e",
+          "footer_text_color": "#131212",
+          "accent_color": "#e94560"
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
