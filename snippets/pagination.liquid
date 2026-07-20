@@ -1,0 +1,62 @@
+{% if paginate.pages > 1 %}
+<nav class="pagination" role="navigation" aria-label="Paginação">
+  {% if paginate.previous %}
+    <a href="{{ paginate.previous.url }}" class="pagination-item pagination-prev" aria-label="Página anterior">
+      &larr; Anterior
+    </a>
+  {% endif %}
+
+  {% for part in paginate.parts %}
+    {% if part.is_link %}
+      <a href="{{ part.url }}" class="pagination-item" aria-label="Página {{ part.title }}">{{ part.title }}</a>
+    {% elsif part.title == paginate.current_page %}
+      <span class="pagination-item active" aria-current="page">{{ part.title }}</span>
+    {% else %}
+      <span class="pagination-item dots">{{ part.title }}</span>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginate.next %}
+    <a href="{{ paginate.next.url }}" class="pagination-item pagination-next" aria-label="Próxima página">
+      Próximo &rarr;
+    </a>
+  {% endif %}
+</nav>
+
+<style>
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 40px;
+  }
+  .pagination-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .pagination-item:hover {
+    border-color: #1a1a2e;
+    color: #1a1a2e;
+  }
+  .pagination-item.active {
+    background: #1a1a2e;
+    border-color: #1a1a2e;
+    color: #fff;
+  }
+  .pagination-item.dots {
+    border: none;
+  }
+</style>
+{% endif %}

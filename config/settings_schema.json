@@ -1,0 +1,96 @@
+[
+  {
+    "name": "Tema da Loja",
+    "settings": [
+      {
+        "type": "text",
+        "id": "store_name",
+        "label": "Nome da Loja",
+        "default": "OlaShop"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Cores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Cor Primária",
+        "default": "#e74c3c"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Cor Secundária",
+        "default": "#1a1a2e"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Cor de Fundo",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Cor do Texto",
+        "default": "#333333"
+      }
+    ]
+  },
+  {
+    "name": "Tipografia",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Fonte dos Títulos",
+        "default": "inter_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Fonte do Corpo",
+        "default": "inter_n4"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Largura Máxima (px)",
+        "min": 960,
+        "max": 1600,
+        "step": 40,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "grid_columns",
+        "label": "Colunas da Grelha",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "grid_spacing",
+        "label": "Espaçamento da Grelha (px)",
+        "min": 10,
+        "max": 50,
+        "step": 5,
+        "default": 25
+      }
+    ]
+  }
+]

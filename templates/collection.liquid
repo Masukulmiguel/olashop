@@ -1,0 +1,43 @@
+<div class="collection-page">
+  <div class="container">
+    <div class="collection-header">
+      <h1 class="collection-title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="collection-description">{{ collection.description }}</div>
+      {% endif %}
+    </div>
+
+    <div class="collection-toolbar">
+      <div class="collection-count">
+        {{ collection.products_count }} {{ collection.products_count | pluralize: 'produto', 'produtos' }}
+      </div>
+      <div class="collection-sort">
+        <label for="SortBy">Ordenar por:</label>
+        <select id="SortBy">
+          <option value="manual">Destaque</option>
+          <option value="best-selling">Mais Vendidos</option>
+          <option value="created-descending">Mais Recentes</option>
+          <option value="price-ascending">Preço: Menor para Maior</option>
+          <option value="price-descending">Preço: Maior para Menor</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="product-grid collection-grid">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        <div class="collection-empty">
+          <p>Nenhum produto encontrado nesta coleção.</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      {% render 'pagination', paginate: paginate %}
+    {% endif %}
+  </div>
+</div>
+
+{% paginate collection.products by 12 %}
+{% endpaginate %}

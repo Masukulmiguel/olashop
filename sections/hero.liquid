@@ -1,0 +1,184 @@
+<div class="hero-section" style="background: {{ section.settings.bg_color }};">
+  {% if section.settings.image != blank %}
+    <div class="hero-image">
+      <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title | escape }}">
+    </div>
+  {% endif %}
+  <div class="hero-overlay" style="background: {{ section.settings.overlay_color }};"></div>
+  <div class="hero-content container">
+    {% if section.settings.subtitle != blank %}
+      <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+    {% if section.settings.title != blank %}
+      <h1 class="hero-title">{{ section.settings.title }}</h1>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <p class="hero-text">{{ section.settings.text }}</p>
+    {% endif %}
+    {% if section.settings.button_label != blank %}
+      <a href="{{ section.settings.button_url }}" class="btn btn-hero">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: {{ section.settings.overlay_opacity | default: 0.4 }};
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 60px 20px;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 15px;
+  }
+  .hero-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: {{ section.settings.text_color }};
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero-text {
+    font-size: 18px;
+    color: {{ section.settings.text_color }};
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+  .btn-hero {
+    display: inline-block;
+    background: {{ section.settings.btn_color | default: '#e74c3c' }};
+    color: #fff;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 768px) {
+    .hero-section { min-height: 400px; }
+    .hero-title { font-size: 32px; }
+    .hero-text { font-size: 16px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem de fundo"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Bem-vindo à nossa loja"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Encontre os Melhores Produtos"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "default": "Produtos de qualidade com os melhores preços. Entrega rápida e segura."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Ver Produtos"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "URL do botão"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Cor do texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Cor do botão",
+      "default": "#e74c3c"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Cor de fundo (quando sem imagem)",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Cor do overlay",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Opacidade do overlay",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Imagem"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+<div class="product-page">
+  <div class="container">
+    <div class="product-grid">
+      <div class="product-images">
+        <div class="product-main-image" id="ProductMainImage">
+          <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title | escape }}" id="ProductImage">
+        </div>
+        {% if product.images.size > 1 %}
+          <div class="product-thumbnails">
+            {% for image in product.images %}
+              <button class="thumbnail {% if forloop.first %}active{% endif %}" data-image="{{ image | img_url: 'large' }}">
+                <img src="{{ image | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="product-info">
+        <h1 class="product-title">{{ product.title }}</h1>
+
+        {% if product.compare_at_price > product.price %}
+          <div class="product-price sale">
+            <span class="current-price">{{ product.price | money }}</span>
+            <span class="compare-price">{{ product.compare_at_price | money }}</span>
+          </div>
+        {% else %}
+          <div class="product-price">{{ product.price | money }}</div>
+        {% endif %}
+
+        {% if product.description != blank %}
+          <div class="product-description">{{ product.description }}</div>
+        {% endif %}
+
+        <form action="/cart/add" method="post" class="product-form" id="ProductForm">
+          {% if product.variants.size > 1 %}
+            <div class="variant-selector">
+              <label for="ProductSelect">{{ product.options.first }}</label>
+              <select id="ProductSelect" name="id">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                    {{ variant.title }} - {% if variant.available %}{{ variant.price | money }}{% else %}Esgotado{% endif %}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% else %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {% endif %}
+
+          <div class="quantity-selector">
+            <button type="button" class="qty-btn minus" aria-label="Diminuir quantidade">-</button>
+            <input type="number" name="quantity" value="1" min="1" class="qty-input" aria-label="Quantidade">
+            <button type="button" class="qty-btn plus" aria-label="Aumentar quantidade">+</button>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-add-to-cart" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}
+              Adicionar ao Carrinho
+            {% else %}
+              Esgotado
+            {% endif %}
+          </button>
+        </form>
+
+        {% if product.vendor != blank %}
+          <div class="product-vendor">Marca: {{ product.vendor }}</div>
+        {% endif %}
+
+        {% if product.type != blank %}
+          <div class="product-type">Tipo: {{ product.type }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

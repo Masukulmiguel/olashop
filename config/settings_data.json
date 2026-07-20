@@ -1,0 +1,15 @@
+{
+  "current": {
+    "colors": {
+      "primary_color": "#e74c3c",
+      "secondary_color": "#1a1a2e",
+      "background_color": "#ffffff",
+      "text_color": "#333333"
+    },
+    "layout": {
+      "page_width": 1400,
+      "grid_columns": 4,
+      "grid_spacing": 25
+    }
+  }
+}

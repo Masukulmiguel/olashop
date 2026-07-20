@@ -1,0 +1,15 @@
+/* Product Page Specific Styles */
+.product-gallery {
+  position: relative;
+}
+.zoom-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+}

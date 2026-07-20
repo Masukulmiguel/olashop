@@ -1,0 +1,49 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Saltar para o conteúdo"
+    },
+    "404": {
+      "title": "Página não encontrada",
+      "subtitle": "404",
+      "text": "A página que procura não existe ou foi movida.",
+      "link": "Voltar à Página Inicial"
+    },
+    "cart": {
+      "title": "Meu Carrinho",
+      "empty": "O seu carrinho está vazio",
+      "empty_message": "Continue comprando para encontrar produtos incríveis!",
+      "continue_browsing": "Continuar Comprando",
+      "subtotal": "Subtotal",
+      "shipping_note": "Frete calculado no checkout",
+      "checkout": "Finalizar Compra",
+      "note": "Notas do pedido"
+    },
+    "search": {
+      "placeholder": "Pesquisar..."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar ao Carrinho",
+      "sold_out": "Esgotado",
+      "vendor": "Marca",
+      "type": "Tipo",
+      "quantity": "Quantidade"
+    },
+    "collection": {
+      "title": "Coleção",
+      "products_count": {
+        "one": "{{ count }} produto",
+        "other": "{{ count }} produtos"
+      },
+      "sort": {
+        "manual": "Destaque",
+        "best-selling": "Mais Vendidos",
+        "created-descending": "Mais Recentes",
+        "price-ascending": "Preço: Menor para Maior",
+        "price-descending": "Preço: Maior para Menor"
+      }
+    }
+  }
+}

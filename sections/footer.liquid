@@ -1,0 +1,259 @@
+<footer class="site-footer" id="SiteFooter">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-col footer-about">
+        <a href="/" class="footer-logo">
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+        </a>
+        {% if section.settings.footer_text != blank %}
+          <p class="footer-text">{{ section.settings.footer_text }}</p>
+        {% endif %}
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Links Rápidos</h3>
+        <ul class="footer-links">
+          {% for link in linklists[section.settings.footer_menu_1].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Ajuda</h3>
+        <ul class="footer-links">
+          {% for link in linklists[section.settings.footer_menu_2].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Contacto</h3>
+        <ul class="footer-contact">
+          {% if section.settings.phone != blank %}
+            <li>Phone: {{ section.settings.phone }}</li>
+          {% endif %}
+          {% if section.settings.email != blank %}
+            <li>Email: <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></li>
+          {% endif %}
+          {% if section.settings.address != blank %}
+            <li>{{ section.settings.address }}</li>
+          {% endif %}
+        </ul>
+        {% if section.settings.show_social %}
+          <div class="footer-social">
+            {% if section.settings.facebook != blank %}
+              <a href="{{ section.settings.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+            {% endif %}
+            {% if section.settings.instagram != blank %}
+              <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-payments">
+        {% for type in shop.enabled_payment_types %}
+          {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endfor %}
+      </div>
+      <div class="footer-copyright">
+        &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos os direitos reservados.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: {{ section.settings.footer_bg | default: '#1a1a2e' }};
+    color: {{ section.settings.footer_text_color | default: '#cccccc' }};
+    padding: 60px 0 30px;
+    margin-top: 60px;
+  }
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-logo .logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+  }
+  .footer-logo img {
+    max-height: 40px;
+  }
+  .footer-text {
+    margin-top: 15px;
+    line-height: 1.7;
+    font-size: 14px;
+  }
+  .footer-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+  .footer-links a {
+    color: {{ section.settings.footer_text_color | default: '#cccccc' }};
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover {
+    color: {{ section.settings.accent_color | default: '#e74c3c' }};
+  }
+  .footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .footer-contact a {
+    color: {{ section.settings.footer_text_color | default: '#cccccc' }};
+    text-decoration: none;
+  }
+  .footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .footer-social a {
+    color: {{ section.settings.footer_text_color | default: '#cccccc' }};
+    transition: color 0.2s;
+  }
+  .footer-social a:hover {
+    color: {{ section.settings.accent_color | default: '#e74c3c' }};
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-payments {
+    display: flex;
+    gap: 10px;
+  }
+  .payment-icon {
+    width: 40px;
+    height: 25px;
+  }
+  .footer-copyright {
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .footer-social { justify-content: center; }
+    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Rodapé",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logótipo do rodapé"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Texto do rodapé",
+      "default": "A sua loja online de confiança. Produtos de qualidade com os melhores preços."
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_1",
+      "label": "Menu 1",
+      "default": "footer"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_2",
+      "label": "Menu 2",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Telefone"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Morada"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Mostrar redes sociais",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "facebook",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram"
+    },
+    {
+      "type": "color",
+      "id": "footer_bg",
+      "label": "Cor de fundo",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Cor do texto",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Cor de destaque",
+      "default": "#e74c3c"
+    }
+  ]
+}
+{% endschema %}
